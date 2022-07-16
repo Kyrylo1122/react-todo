@@ -1,0 +1,6 @@
+[
+  { "id": "id-1", "text": "to do this", "completed": false },
+  { "id": "id-2", "text": "to do that", "completed": true },
+  { "id": "id-3", "text": "to do pis", "completed": true },
+  { "id": "id-4", "text": "to do pass", "completed": false }
+]
