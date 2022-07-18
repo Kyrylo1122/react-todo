@@ -6,34 +6,14 @@ import ToDoList from "./componens/ToDoList/ToDoList";
 import shortid from "shortid";
 import { Component } from "react";
 import { Box } from "./componens/Box/Box";
+import { IconBtn } from "./componens/IconButtons/IconBtn";
+import { GlobalStyle } from "./componens/GlobalStyle/GlobalStyle";
 
 class App extends Component {
   state = {
     todos: [],
     filter: "",
-  };
-  changeFilter = (e) => {
-    this.setState({ filter: e.currentTarget.value });
-  };
-  addTodo = (text) => {
-    const todo = {
-      id: shortid.generate(),
-      text,
-      completed: false,
-    };
-    this.setState((prevState) => ({ todos: [todo, ...prevState.todos] }));
-  };
-  deleteTodo = (todoId) => {
-    this.setState((prevState) => ({
-      todos: prevState.todos.filter((e) => e.id !== todoId),
-    }));
-  };
-  toggleCompleted = (todoId) => {
-    this.setState((prevState) => ({
-      todos: prevState.todos.map((e) =>
-        e.id === todoId ? { ...e, completed: !e.completed } : e
-      ),
-    }));
+    showModal: false,
   };
   componentDidMount() {
     const todos = localStorage.getItem("todos");
@@ -47,6 +27,31 @@ class App extends Component {
       localStorage.setItem("todos", JSON.stringify(this.state.todos));
     }
   }
+  changeFilter = (e) => {
+    this.setState({ filter: e.currentTarget.value });
+  };
+  addTodo = (text) => {
+    const todo = {
+      id: shortid.generate(),
+      text,
+      completed: false,
+    };
+    this.setState((prevState) => ({ todos: [todo, ...prevState.todos] }));
+  };
+
+  deleteTodo = (todoId) => {
+    this.setState((prevState) => ({
+      todos: prevState.todos.filter((e) => e.id !== todoId),
+    }));
+  };
+  toggleCompleted = (todoId) => {
+    this.setState((prevState) => ({
+      todos: prevState.todos.map((e) =>
+        e.id === todoId ? { ...e, completed: !e.completed } : e
+      ),
+    }));
+  };
+
   render() {
     const { todos, filter } = this.state;
     const completed = todos.reduce(
@@ -65,7 +70,9 @@ class App extends Component {
         backgroundSize="100px "
         backgroundRepeat="repeat"
       >
+        <GlobalStyle />
         <h1>To Do List</h1>
+
         <Box
           display="flex"
           flexDirection="column"

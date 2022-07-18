@@ -1,4 +1,5 @@
 import { TaskItem, DeleteBtn } from "./ToDoList.style";
+import { IoTrashOutline } from "react-icons/io5";
 
 const ToDoList = ({ todos, deleteEl, toggle }) => (
   <>
@@ -13,7 +14,7 @@ const ToDoList = ({ todos, deleteEl, toggle }) => (
           {text}
 
           <DeleteBtn className="btnDel" onClick={() => deleteEl(id)}>
-            Delete
+            <IoTrashOutline />
           </DeleteBtn>
         </TaskItem>
       ))}
